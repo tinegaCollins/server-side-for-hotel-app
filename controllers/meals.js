@@ -112,4 +112,11 @@ setInterval(() => {
     switchSpecials()
 },86400000);
 
-
+exports.addQuantity = async (req,res)=>{
+    const all = await meals.find();
+    for (let i = 0; i < all.length; i++) {
+        all[i].quantity = 1;
+        await all[i].save();
+    }
+    res.send(true)
+}
