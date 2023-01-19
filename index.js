@@ -4,14 +4,16 @@ const loginsControllers = require('./controllers/logins.js');
 const mealsControllers = require('./controllers/meals.js')
 const cors = require('cors');
 require('dotenv').config();
+const url =process.env.MONGO_URL
+/* Suppress mongoose lower than 7 errors*/
 
+mongoose.set('strictQuery', false);
 
-
-
-mongoose.connect(
-    "mongodb+srv://CEMS_admin:emmajZOz1b10Hyh0@cems.5le7maf.mongodb.net/?retryWrites=true&w=majority",
-    { useNewUrlParser: true }
-).then(()=>{
+mongoose.connect(url).then((res)=>{
+    console.log("running well");
+}).catch((err)=>{
+    console.log(err);
+})
     const app = express()
     app.use(express.json());
     app.use(cors({
@@ -38,4 +40,3 @@ mongoose.connect(
     app.listen(process.env.PORT || 8000, ()=>{
         console.log("server on port 8000");
     })
-})
