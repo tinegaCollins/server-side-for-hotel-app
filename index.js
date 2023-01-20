@@ -7,7 +7,7 @@ require('dotenv').config();
 const url =process.env.MONGO_URL
 /* Suppress mongoose lower than 7 errors*/
 
-mongoose.set('strictQuery', false);
+mongoose.set('strictQuery', true);
 
 mongoose.connect(url).then(()=>{
     console.log("running well");
