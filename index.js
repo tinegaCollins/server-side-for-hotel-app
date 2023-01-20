@@ -9,7 +9,7 @@ const url =process.env.MONGO_URL
 
 mongoose.set('strictQuery', false);
 
-mongoose.connect(url).then((res)=>{
+mongoose.connect(url).then(()=>{
     console.log("running well");
 }).catch((err)=>{
     console.log(err);
@@ -20,6 +20,9 @@ mongoose.connect(url).then((res)=>{
         origin: "*",
         methods: ["GET", "POST", "PATCH","DELETE"]
     }))
+    app.get('/',(req,res)=>{
+        res.send("home")
+    })
     app.post('/create-account', loginsControllers.createNewUser);
     app.post('/login', loginsControllers.login);
     app.post('/check-number', loginsControllers.checkNumber);
@@ -37,6 +40,6 @@ mongoose.connect(url).then((res)=>{
     app.get('/get-price/:id', mealsControllers.getPrice);
     app.get('/get-phone/:id', loginsControllers.getPhone);
     app.get('/add-quantity', mealsControllers.addQuantity);
-    app.listen(process.env.PORT || 8000, ()=>{
-        console.log("server on port 8000");
+    app.listen(process.env.PORT || 5000, ()=>{
+        console.log("server on port 5000");
     })
